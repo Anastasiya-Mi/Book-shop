@@ -1,3 +1,5 @@
+import {BODY,fragment,book,cart} from '../modules/1.variables.js';
+
 const functionsCommon = {
     createDiv:function (value){
         let div = document.createElement('div');
@@ -120,6 +122,224 @@ const functionsForMainPage = {
      
 }
 
+const functionsForShoppingCart = {
+    createShoppingCart:function  (){
+        let divCartWrap = createDiv('cart_wrap');
+        let divCartHeader = createHeaderCart ();
+        let divCartBody = createDiv('cart_body');
+        let messageText = createTitle('h3',"You cart is empty");
+        divCartBody.append(messageText);
+        let divCartFooter = createFooterCart ();
+        divCartWrap.append(divCartHeader);
+        divCartWrap.append(divCartBody);
+        divCartWrap.append(divCartFooter);
+        return divCartWrap;
+    },    
+    createHeaderCart:function (){
+        let divTitleWrap = createDiv('title_cart_wrap');
+        let divFixTitle = createDiv('cart_title');    
+        let img = createImg('../../assets/icons/bag.svg','bag');
+        let nameTitle = createTitle('h3',"cart");
+        let divCommonCountItems = createDiv('common_count_items');
+        let countTitle = createTitle('h3',"0");
+        countTitle.classList.add('title_count');
+        let divSubTitle = createDiv('sub_title');
+        let subTitle1 = createTitle('h3',"Item");
+        let subTitle2 = createTitle('h3',"Price");
+        let subTitle3 = createTitle('h3',"Quantity");
+        divSubTitle.append(subTitle1);
+        divSubTitle.append(subTitle2);
+        divSubTitle.append(subTitle3);
+        divCommonCountItems.append(countTitle);
+        divFixTitle.append(img);
+        divFixTitle.append(nameTitle);
+        divFixTitle.append(divCommonCountItems);
+        divTitleWrap.append(divFixTitle);
+        divTitleWrap.append(divSubTitle);
+        return divTitleWrap;
+    },
+    createFooterCart:function (){
+        let divFooterWrap = createDiv('footer_cart_wrap');
+        let button = createBtnConfirm();
+        let subtotal = createDiv('footer_cart_subtotal');
+        let nameTitle = createTitle('h3',"Subtotal:");
+        let spanSubTotalItems = document.createElement('span');
+        let countTitle = 0;
+        let items = " items";
+        let phrase = countTitle + items;
+        let spanCount = document.createElement('span');
+        let number = 0;
+        let currency = " $";
+        let summary = number + currency;
+        spanCount.innerText = summary;
+        spanCount.classList.add('sub_total_count');
+        spanSubTotalItems.innerText = phrase;
+        spanSubTotalItems.classList.add('sub_total_items');
+        subtotal.prepend(nameTitle);
+        subtotal.append(spanSubTotalItems);
+        subtotal.append(spanCount);
+        divFooterWrap.append(subtotal);
+        divFooterWrap.append(button);
+        return divFooterWrap;
+    },
+    createBtnConfirm:function(){
+        let form = document.createElement('form');
+        form.setAttribute('action','../delivery form/delivery.html');    
+        let button = document.createElement('button');    
+        button.classList.add('confirm');    
+        button.innerText = 'Confirm';
+        form.append(button);
+        return form;
+    },
+    createCloseBtn:function (){
+        let divCross = createDiv('cross_shop');
+        let span = document.createElement('span');
+        let span1 = document.createElement('span');
+        divCross.append(span);
+        divCross.append(span1);  
+    },
+    createShopIcon:function (){
+        let divShopIconWrap = createDiv('shop_icon_wrap');
+        let src = '../../assets/icons/bag.svg';
+        let img = createImg(src,"bag");
+        let divShopImg  = createDiv('shop_img');
+        divShopImg.append(img);
+        let divShopTotal = createDiv('shop_total_value');
+        let shopTotal = createTitle("h5",'0');
+        shopTotal.classList.add('shop_total_header')
+        divShopTotal.append(shopTotal);
+        divShopIconWrap.append(divShopImg);
+        divShopIconWrap.append(shopTotal);
+        return divShopIconWrap;    
+    },  
+    updateCartTotal:function(){
+      let cartItemContainer = document.getElementsByClassName('cart_body')[0];
+      let cartItems = cartItemContainer.getElementsByClassName('book_card_shop');
+      let total =0;
+      let totalItems = 0;
+      for( let i=0;i<cartItems.length;i++){
+          let cartItem = cartItems[i];
+          let priceElement = cartItem.getElementsByClassName('card_shop_price')[0];
+          let quantityElement = cartItem.getElementsByClassName('card_shop_quantity')[0];
+          let price = parseFloat(priceElement.innerText);
+          let quantity = quantityElement.value;
+          total = total + (price*quantity);
+          totalItems = Number(totalItems) + Number(quantity);  
+      }      
+      let subtotal = document.getElementsByClassName('sub_total_count')[0];
+      let subtotalItems = document.getElementsByClassName('sub_total_items')[0];
+      let titleTotalItems = document.getElementsByClassName('title_count')[0];
+      let titleTotalItemsHeader = document.getElementsByClassName('shop_total_header')[0];
+      subtotal.innerText = total +' $';
+      subtotalItems.innerText = totalItems +' items';
+      titleTotalItems.innerText = totalItems;
+      titleTotalItemsHeader.innerText = totalItems;
+      },
+    removeCartItem:function (event){
+          let buttonClicked = event.target.closest('.cross_shop');
+          let parent = buttonClicked.parentElement.parentElement;    
+          let parentID = parent.getAttribute('id');
+          let cartValue = cart.find((cart)=> cart.id === parentID); 
+          let cartIndex =cart.indexOf(cartValue);
+          cart.splice(cartIndex,1);    
+          parent.remove();    
+          update();
+          return cart;
+      },
+    quantityChange:function quantityChange (event){
+        let input = event.target;    
+        if(isNaN(input.value) || input.value <= 0){
+            input.value = 1;
+        }
+        let cartID = input.dataset.id;   
+        let cartValue = cart.find((cart)=> cart.id === cartID); 
+        cartValue.numberOfUnits = input.value;    
+        update();     
+        return cart;    
+    },
+    addToCartClicked:function (event){
+        let button =event.target;
+        let cartID = button.dataset.id;
+        addToCart (cartID);    
+        },        
+    addToCart:function (value){
+        let bookCardShopCurrent = document.getElementsByClassName('book_card_shop');
+        for( let i=0;i<bookCardShopCurrent.length;i++){
+        let currentID = bookCardShopCurrent[i].getAttribute('id');
+            if (currentID === value){
+            let currentBook = bookCardShopCurrent[i];   
+            let currentQuantity = currentBook.getElementsByClassName('card_shop_quantity')[0];
+            let currentTotal = currentQuantity.getAttribute('value');
+            let total = Number(currentTotal);
+            total++;
+            let cartValue = cart.find((cart)=> cart.id === value); 
+            cartValue.numberOfUnits = total;        
+            currentQuantity.setAttribute('value',total);        
+            update();        
+            return cart;
+            }       
+        }    
+            let cartItemContainer = document.getElementsByClassName('cart_body')[0];
+            let bookValue = book.find((book)=> book.id === value);    
+            cart.push({...bookValue,
+            numberOfUnits:1,});   
+            let bookCardShop = createShopCart (bookValue);
+            fragment.append(bookCardShop);    
+            cartItemContainer.append(fragment);     
+            update();
+            return cart;
+        },   
+    createShopCart:function (value){
+            let cardId = value.id;
+            let bookCardShop = createDiv('book_card_shop');
+            bookCardShop.id = cardId;
+            let divBookImgShop = createDiv('book_img_shop');
+            let src = value.imageLink;    
+            let bookImgShop = createImg(src,'cover');
+            divBookImgShop.append(bookImgShop);
+            let divBookInfoShop = createDiv('book_info_shop');
+            let title = value.title;
+            let titleBook = createTitle("h4",title);
+            let author =value.author;
+            let authorBook = createTitle("h3",author);
+            divBookInfoShop.append(titleBook);
+            divBookInfoShop.append(authorBook);
+            let divCountShop = createDiv('book_count');
+            let price =value.price;
+            let priceBook = createTitle("h5",price);
+            priceBook.classList.add('card_shop_price')
+            let currency = createTitle("h5","$");
+            divCountShop.append(priceBook);
+            divCountShop.append(currency);
+            let divShopBtn = createDiv('shop_btn');
+            let input = document.createElement('input');
+            input.classList.add('card_shop_quantity');
+            input.setAttribute('type','number');
+            input.setAttribute('value','1');
+            input.dataset.id = value.id;
+            input.addEventListener('change',quantityChange);
+            let divCrossShop = createDiv('cross_shop');
+            let span = document.createElement('span');
+            let span1 = document.createElement('span');
+            divCrossShop.append(span);
+            divCrossShop.append(span1);
+            divCrossShop.addEventListener('click',removeCartItem);
+            divShopBtn.append(input);
+            divShopBtn.append(divCrossShop);
+            bookCardShop.append(divBookImgShop);
+            bookCardShop.append(divBookInfoShop);
+            bookCardShop.append(divCountShop);
+            bookCardShop.append(divShopBtn);
+            return bookCardShop;
+        },
+        saveItemsInCart:function (){
+            localStorage.setItem('CART',JSON.stringify(cart));        
+        },
+        update:function (){
+            updateCartTotal();
+            saveItemsInCart()
+        }
+};
 
 
 export const createDiv = functionsCommon.createDiv;
@@ -131,7 +351,22 @@ export const createBookCard = functionsForMainPage.createBookCard;
 export const createHeader = functionsForMainPage.createHeader;
 export const createMain = functionsForMainPage.createMain;
 export const createFooter = functionsForMainPage.createFooter;
-// export const createBookCard = functionsForMainPage.createBookCard;
+
+export const createShoppingCart = functionsForShoppingCart.createShoppingCart;
+export const createHeaderCart = functionsForShoppingCart.createHeaderCart;
+export const createFooterCart = functionsForShoppingCart.createFooterCart;
+export const createBtnConfirm = functionsForShoppingCart.createBtnConfirm;
+export const createCloseBtn = functionsForShoppingCart.createCloseBtn;
+export const createShopIcon = functionsForShoppingCart.createShopIcon;
+
+export const updateCartTotal = functionsForShoppingCart.updateCartTotal;
+export const removeCartItem = functionsForShoppingCart.removeCartItem;
+export const quantityChange = functionsForShoppingCart.quantityChange;
+export const addToCartClicked = functionsForShoppingCart.addToCartClicked;
+export const addToCart = functionsForShoppingCart.addToCart;
+export const createShopCart = functionsForShoppingCart.createShopCart;
+export const saveItemsInCart = functionsForShoppingCart.saveItemsInCart;
+export const update = functionsForShoppingCart.update;
 
 
 
