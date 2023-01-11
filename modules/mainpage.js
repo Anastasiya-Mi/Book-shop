@@ -5,7 +5,7 @@ import {createDiv,createImg,createTitle,createBtn,createBookCard,createHeader,cr
   createShoppingCart,createHeaderCart,createFooterCart,createBtnConfirm,createCloseBtn,createShopIcon} from '../modules/2.functions.js';
 import {updateCartTotal,removeCartItem} from '../modules/2.functions.js';
 import {quantityChange,addToCartClicked,addToCart,createShopCart,saveItemsInCart,update} from '../modules/2.functions.js';
-
+import {createPopup,closeModalWin,createParagraph} from '../modules/2.functions.js';
 // create book cards
 let bookCardsArr = [];
 
@@ -49,6 +49,7 @@ let content = document.querySelectorAll('.content');
 content[1].append(fragment);
 fragment.append(divShopIconWrap);
 content[0].append(fragment);
+
 
 let removeCartItemBtn = document.getElementsByClassName('cross_shop');
 
@@ -113,3 +114,14 @@ cartBody.ondragover = allowDrop;
 cartBody.ondrop = drop;
 
 // modal window
+const btnShowMore = document.querySelectorAll('.show_more');
+// let card = document.querySelectorAll('.book_card');
+
+btnShowMore.forEach(function(element){    
+    element.addEventListener('click',function(event){
+        let idBtn = element.dataset.id;        
+        let bookWindow = book.find((book) => book.id === idBtn);        
+        createPopup (bookWindow);             
+    });
+   
+});

@@ -213,27 +213,28 @@ const functionsForShoppingCart = {
         return divShopIconWrap;    
     },  
     updateCartTotal:function(){
-      let cartItemContainer = document.getElementsByClassName('cart_body')[0];
-      let cartItems = cartItemContainer.getElementsByClassName('book_card_shop');
-      let total =0;
-      let totalItems = 0;
-      for( let i=0;i<cartItems.length;i++){
-          let cartItem = cartItems[i];
-          let priceElement = cartItem.getElementsByClassName('card_shop_price')[0];
-          let quantityElement = cartItem.getElementsByClassName('card_shop_quantity')[0];
-          let price = parseFloat(priceElement.innerText);
-          let quantity = quantityElement.value;
-          total = total + (price*quantity);
-          totalItems = Number(totalItems) + Number(quantity);  
-      }      
-      let subtotal = document.getElementsByClassName('sub_total_count')[0];
-      let subtotalItems = document.getElementsByClassName('sub_total_items')[0];
-      let titleTotalItems = document.getElementsByClassName('title_count')[0];
-      let titleTotalItemsHeader = document.getElementsByClassName('shop_total_header')[0];
-      subtotal.innerText = total +' $';
-      subtotalItems.innerText = totalItems +' items';
-      titleTotalItems.innerText = totalItems;
-      titleTotalItemsHeader.innerText = totalItems;
+        let cartItemContainer = document.getElementsByClassName('cart_body')[0];
+        let cartItems = cartItemContainer.getElementsByClassName('book_card_shop');
+        let total =0;
+        let totalItems = 0;
+        for( let i=0;i<cartItems.length;i++){
+            let cartItem = cartItems[i];
+            let priceElement = cartItem.getElementsByClassName('card_shop_price')[0];
+            let quantityElement = cartItem.getElementsByClassName('card_shop_quantity')[0];
+            let price = parseFloat(priceElement.innerText);
+            let quantity = quantityElement.value;
+            total = total + (price*quantity);
+            totalItems = Number(totalItems) + Number(quantity);  
+        }
+        
+        let subtotal = document.getElementsByClassName('sub_total_count')[0];
+        let subtotalItems = document.getElementsByClassName('sub_total_items')[0];
+        let titleTotalItems = document.getElementsByClassName('title_count')[0];
+        let titleTotalItemsHeader = document.getElementsByClassName('shop_total_header')[0];
+        subtotal.innerText = total +' $';
+        subtotalItems.innerText = totalItems +' items';
+        titleTotalItems.innerText = totalItems;
+        titleTotalItemsHeader.innerText = totalItems;
       },
     removeCartItem:function (event){
           let buttonClicked = event.target.closest('.cross_shop');
@@ -253,9 +254,11 @@ const functionsForShoppingCart = {
         }
         let cartID = input.dataset.id;   
         let cartValue = cart.find((cart)=> cart.id === cartID); 
-        cartValue.numberOfUnits = input.value;    
+        let numberOfUnits = input.value;
+        cartValue.numberOfUnits = numberOfUnits;
+        input.setAttribute('value',numberOfUnits);        
         update();     
-        return cart;    
+        return cart;      
     },
     addToCartClicked:function (event){
         let button =event.target;
@@ -263,32 +266,35 @@ const functionsForShoppingCart = {
         addToCart (cartID);    
         },        
     addToCart:function (value){
-        let bookCardShopCurrent = document.getElementsByClassName('book_card_shop');
+            let bookCardShopCurrent = document.getElementsByClassName('book_card_shop');    
         for( let i=0;i<bookCardShopCurrent.length;i++){
-        let currentID = bookCardShopCurrent[i].getAttribute('id');
+            let currentID = bookCardShopCurrent[i].getAttribute('id');
             if (currentID === value){
             let currentBook = bookCardShopCurrent[i];   
             let currentQuantity = currentBook.getElementsByClassName('card_shop_quantity')[0];
+            console.log(currentQuantity)
             let currentTotal = currentQuantity.getAttribute('value');
+            console.log(currentTotal)
             let total = Number(currentTotal);
             total++;
             let cartValue = cart.find((cart)=> cart.id === value); 
-            cartValue.numberOfUnits = total;        
+            cartValue.numberOfUnits = total; 
+            currentQuantity.value = total;
             currentQuantity.setAttribute('value',total);        
             update();        
             return cart;
-            }       
+        }       
         }    
-            let cartItemContainer = document.getElementsByClassName('cart_body')[0];
-            let bookValue = book.find((book)=> book.id === value);    
-            cart.push({...bookValue,
-            numberOfUnits:1,});   
-            let bookCardShop = createShopCart (bookValue);
-            fragment.append(bookCardShop);    
-            cartItemContainer.append(fragment);     
-            update();
-            return cart;
-        },   
+        let cartItemContainer = document.getElementsByClassName('cart_body')[0];
+        let bookValue = book.find((book)=> book.id === value);    
+        cart.push({...bookValue,
+        numberOfUnits:1,});   
+        let bookCardShop = createShopCart (bookValue);
+        fragment.append(bookCardShop);    
+        cartItemContainer.append(fragment);     
+        update();
+        return cart;
+    },   
     createShopCart:function (value){
             let cardId = value.id;
             let bookCardShop = createDiv('book_card_shop');
@@ -341,6 +347,61 @@ const functionsForShoppingCart = {
         }
 };
 
+const functionsForModalWindow = {
+    createPopup:function (value){
+        let divModalBody = createDiv("modal_body");    
+        let divBookWrap = createDiv("book_wrap");
+        let divBook = createDiv("book");
+        let classArr = ["cross","title"]
+        let arrSecond = ["cover","page","page","page","page","page","last-page","back-cover"];
+        for(let i=0;i<classArr.length;i++){
+            let div = createDiv(classArr[i]);        
+            if (i == 0){
+                let span = document.createElement('span');
+                let span1 = document.createElement('span');
+                div.append(span);
+                div.append(span1);
+            } 
+            if (i == 1 ){
+                let title = createTitle("h3","Touch book");
+                div.append(title);
+            }
+            divBookWrap.append(div);
+        }
+        for(let i=0;i<arrSecond.length;i++){
+            let div = createDiv(arrSecond[i]);        
+            if (i == 0){
+                
+                let src = value.imageLink;
+                let img = createImg(src,"cover");
+                let divChild = createDiv("page-first");
+                div.append(img);
+                div.append(divChild);
+            } 
+            if (i == 6 ){
+                let description = createParagraph(value);
+                div.append(description);
+            }
+            divBook.append(div);
+        }       
+        divBookWrap.append(divBook);
+        divModalBody.append(divBookWrap);
+        fragment.append(divModalBody);
+        BODY.append(fragment); 
+        let cross = document.querySelector('.cross');    
+        cross.addEventListener('click',closeModalWin);    
+    },
+    closeModalWin:function (event){    
+        if(event.target.closest('.cross')){
+        let modalBody = document.querySelector('.modal_body');
+        modalBody.remove();}
+    },
+    createParagraph :function (value){
+        let Paragraph = document.createElement('p');
+        Paragraph.innerText = value.description;
+        return Paragraph;
+    } 
+};
 
 export const createDiv = functionsCommon.createDiv;
 export const createImg = functionsCommon.createImg;
@@ -367,6 +428,11 @@ export const addToCart = functionsForShoppingCart.addToCart;
 export const createShopCart = functionsForShoppingCart.createShopCart;
 export const saveItemsInCart = functionsForShoppingCart.saveItemsInCart;
 export const update = functionsForShoppingCart.update;
+
+
+export const createPopup = functionsForModalWindow.createPopup;
+export const closeModalWin = functionsForModalWindow.closeModalWin;
+export const createParagraph = functionsForModalWindow.createParagraph;
 
 
 
