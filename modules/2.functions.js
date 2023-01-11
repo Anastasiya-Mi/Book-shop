@@ -184,7 +184,7 @@ const functionsForShoppingCart = {
     },
     createBtnConfirm:function(){
         let form = document.createElement('form');
-        form.setAttribute('action','../delivery form/delivery.html');    
+        form.setAttribute('action','../delivery_form/delivery.html');    
         let button = document.createElement('button');    
         button.classList.add('confirm');    
         button.innerText = 'Confirm';
@@ -247,7 +247,7 @@ const functionsForShoppingCart = {
           update();
           return cart;
       },
-    quantityChange:function quantityChange (event){
+    quantityChange:function (event){
         let input = event.target;    
         if(isNaN(input.value) || input.value <= 0){
             input.value = 1;
@@ -268,7 +268,7 @@ const functionsForShoppingCart = {
     addToCart:function (value){
             let bookCardShopCurrent = document.getElementsByClassName('book_card_shop');    
         for( let i=0;i<bookCardShopCurrent.length;i++){
-            let currentID = bookCardShopCurrent[i].getAttribute('id');
+            let currentID = bookCardShopCurrent[i].getAttribute('data-id');
             if (currentID === value){
             let currentBook = bookCardShopCurrent[i];   
             let currentQuantity = currentBook.getElementsByClassName('card_shop_quantity')[0];
@@ -298,7 +298,7 @@ const functionsForShoppingCart = {
     createShopCart:function (value){
             let cardId = value.id;
             let bookCardShop = createDiv('book_card_shop');
-            bookCardShop.id = cardId;
+            bookCardShop.dataset.id = cardId;
             let divBookImgShop = createDiv('book_img_shop');
             let src = value.imageLink;    
             let bookImgShop = createImg(src,'cover');

@@ -115,7 +115,6 @@ cartBody.ondrop = drop;
 
 // modal window
 const btnShowMore = document.querySelectorAll('.show_more');
-// let card = document.querySelectorAll('.book_card');
 
 btnShowMore.forEach(function(element){    
     element.addEventListener('click',function(event){
