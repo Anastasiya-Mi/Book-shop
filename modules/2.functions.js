@@ -1,3 +1,4 @@
+"use strict"
 import {BODY,fragment,book,cart} from '../modules/1.variables.js';
 
 const functionsCommon = {
@@ -271,10 +272,8 @@ const functionsForShoppingCart = {
             let currentID = bookCardShopCurrent[i].getAttribute('data-id');
             if (currentID === value){
             let currentBook = bookCardShopCurrent[i];   
-            let currentQuantity = currentBook.getElementsByClassName('card_shop_quantity')[0];
-            console.log(currentQuantity)
-            let currentTotal = currentQuantity.getAttribute('value');
-            console.log(currentTotal)
+            let currentQuantity = currentBook.getElementsByClassName('card_shop_quantity')[0];            
+            let currentTotal = currentQuantity.getAttribute('value');            
             let total = Number(currentTotal);
             total++;
             let cartValue = cart.find((cart)=> cart.id === value); 

@@ -36,9 +36,9 @@
                 </div>
                 <div class="form_wrap">
                     <div class="form_row">
-                    <form action="" class="form" id="add_form">
+                    <form  class="form" id="add_form">
                         <div class="input_box">                            
-                                <input type="text" class="name" placeholder="Name" value="">
+                                <input type="text" class="name" id="name" placeholder="Name" value="">
                                 <span class="name_invalid">The field is invalid!At least 4 letters!</span>                           
                         </div>
                          <div class="input_box">                            
@@ -51,20 +51,24 @@
                             <span class="date_invalid">The field is invalid!Not earlier than next day!</span>                       
                          </div>    
                          <div class="input_box">                            
-                                <input type="text" class="street" placeholder="Street">                          
+                                <input type="text" class="street" placeholder="Street"> 
+                                <span class="street_invalid">The field is invalid!At least 5 symbols!</span>                                                      
                          </div>
                          <div class="input_box">
                             <input type="number" class="house_number" placeholder="House number"> 
+                            <span class="house_number_invalid">The field is invalid!Positive numbers only!</span>                            
                          </div>      
-                         <div class="input_box">
-                            <input type="number" class="flat_number" placeholder="Flat number">
+                         <div class="input_box ">
+                            <input type="text" class="flat_number" placeholder="Flat number">
+                            <span class="flat_number_invalid">The field is invalid!Positive numbers only!exm. 1-23 or 23!</span>                             
                          </div>      
-                         <div class="input_box">
+                         <div class="input_box radio">
                             <h3>Choose the payment type</h3>                            
-                            <input type="radio" id="cash" class="payment" value="cash">
+                            <input type="radio" id="cash" class="payment" name="payment" value="cash">
                             <label for="cash">cash</label>
-                            <input type="radio" id="cart" class="payment" value="cart">
+                            <input type="radio" id="cart" class="payment" name="payment" value="cart">
                             <label for="cart">cart</label>
+                            <span class="payment_invalid">The field is invalid!Select type of payment!</span>
                          </div>
                          <div class="input_box">
                             <h3>Choose 2 gifts(optional):</h3>
@@ -75,10 +79,10 @@
                             <input type="checkbox" id="discount" class="gifts" value="discount"> 
                             <label for="discount">provide 2% discount to the next time</label>
                             <input type="checkbox" id="branded" class="gifts" value="branded"> 
-                            <label for="branded">branded pen or pencil</label>
+                            <label for="branded">branded pen or pencil</label>                            
                          </div> 
-                         <div class="btn_submit">
-                            <button type="submit" class="btn_submit">FINISH</button>
+                         <div class="btn_submit_wrap">
+                            <button class="btn_submit" disabled="disabled">FINISH</button>
                          </div>
                         </form>                       
                      </div>
@@ -107,9 +111,20 @@
             <form action="../main/index.html">
                 <button class="btn_empty">Done</button>
             </form>
+        </div>        
+        </div>
+        <div class="order">
+            <div class="order_body">
+                <h3>The order created!</h3>
+                <h4 class="message_address"></h4>
+                <h4 class="message_customer"></h4>
+                <h4 class="message_date"></h4>
+                <form action="../main/index.html">
+                    <button class="btn_order">Done</button>
+                </form>
+            </div>
         </div>
             
-        </div>
     </main>
 </body>
 </html>

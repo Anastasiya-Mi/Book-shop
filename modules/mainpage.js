@@ -1,6 +1,6 @@
 "use strict"
  // import variables and functions
-import {BODY,fragment,book,cart} from '../modules/1.variables.js';
+import {BODY,fragment,book} from '../modules/1.variables.js';
 import {createDiv,createImg,createTitle,createBtn,createBookCard,createHeader,createMain,createFooter,
   createShoppingCart,createHeaderCart,createFooterCart,createBtnConfirm,createCloseBtn,createShopIcon} from '../modules/2.functions.js';
 import {updateCartTotal,removeCartItem} from '../modules/2.functions.js';
@@ -36,20 +36,18 @@ for(let i =0;i<bookCardsArr.length;i++){
     fragment.append(value);
 }
 divBookContent.append(fragment);
- 
-// shopping cart
-if(!cart){
-    cart = [];
-}
 
-let shoppingCart = createShoppingCart ();
-let divShopIconWrap = createShopIcon();
-fragment.append(shoppingCart);
 let content = document.querySelectorAll('.content');
-content[1].append(fragment);
+let divShopIconWrap = createShopIcon();
 fragment.append(divShopIconWrap);
 content[0].append(fragment);
+ 
+// shopping cart
 
+let cart = [];
+let shoppingCart = createShoppingCart ();
+fragment.append(shoppingCart);
+content[1].append(fragment);
 
 let removeCartItemBtn = document.getElementsByClassName('cross_shop');
 

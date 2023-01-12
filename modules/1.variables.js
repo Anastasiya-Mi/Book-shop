@@ -1,3 +1,4 @@
+"use strict"
  const variables = {
     BODY:document.querySelector('body'),    
     fragment:document.createDocumentFragment(),
@@ -81,10 +82,12 @@
         "id": "ten",
         "description": "Secrets of the Javascript Ninja takes you on a journey towards mastering modern JavaScript development in three phases: design, construction, and maintenance. Written for JavaScript developers with intermediate-level skills, this book will give you the knowledge you need to create a cross-browser JavaScript library from the ground up."
       }
-    ],
-    cart:JSON.parse(localStorage.getItem('CART'))
+    ]    
  }
+
+
+ export let cart = [];
 export const BODY = variables.BODY;
 export const fragment = variables.fragment;
 export const book = variables.book;
-export const cart = variables.cart;
+
