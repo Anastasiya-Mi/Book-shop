@@ -1,13 +1,17 @@
 "use strict"
 import {cart} from '../modules/1.variables.js';
+import {fragment,reg,reg2,reg3,reg4,orderData} from '../modules/1.variables.js';
+export let orderDataSize = orderData.size;
+export let btnSubmit = document.querySelector('.btn_submit');
 const functionsForCheckout ={
     createOrderBook:function (){
-        if (localStorage.getItem('CART') !== null) {
+        let orderBook = localStorage.getItem('CART')
+        if (orderBook == null) {
             let emptyDiv = document.querySelector('.empty'); 
             emptyDiv.style.display = 'block';
-        }
-        let orderBook = localStorage.getItem('CART')
+        } else {       
         orderBook = JSON.parse(orderBook);
+        }
         return orderBook;
     },
     updateTotalInOrder:function (){
@@ -55,8 +59,8 @@ const functionsForCheckout ={
         return cart;
     },
     createEmptyOrder:function (){
-        let cartShopValue = document.querySelectorAll('.book_cart_shop');
-        if (cartShopValue.length == 0){
+        let cartShopValue = document.querySelectorAll('.book_cart_shop');        
+        if (cartShopValue.length == 0){            
             let emptyDiv = document.querySelector('.empty'); 
             emptyDiv.style.display = 'block';
         }

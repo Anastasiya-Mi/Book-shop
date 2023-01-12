@@ -82,11 +82,15 @@
         "id": "ten",
         "description": "Secrets of the Javascript Ninja takes you on a journey towards mastering modern JavaScript development in three phases: design, construction, and maintenance. Written for JavaScript developers with intermediate-level skills, this book will give you the knowledge you need to create a cross-browser JavaScript library from the ground up."
       }
-    ]    
+    ]
  }
+ export let reg = /^[a-zA-ZА-Яа-яЁё]+$/;
+ export let reg2 = /^[a-zA-ZА-Яа-яЁё0-9]+$/;
+ export let reg3 = /^[1-9][0-9]*$/;
+ export let reg4 = /(^[1-9][0-9]*$)|(^[1-9][0-9]*-[0-9]+$)/;
+ export let orderData = new Map();
 
-
- export let cart = [];
+export let cart = [];
 export const BODY = variables.BODY;
 export const fragment = variables.fragment;
 export const book = variables.book;

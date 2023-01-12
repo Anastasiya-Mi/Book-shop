@@ -1,13 +1,12 @@
 "use strict"
  // import variables and functions
-import {fragment,cart} from '../modules/1.variables.js';
+import {fragment,cart,reg,reg2,reg3,reg4,orderData} from '../modules/1.variables.js';
 import {createOrderBook,updateTotalInOrder,quantityChangeInOrder,removeCartItemInOrder,createEmptyOrder} from '../modules/3.functions_for_checkout.js';
-import {validation,validationBlock,quantityOfGifts,checkLength,finishOrder} from '../modules/3.functions_for_checkout.js';
+import {validation,validationBlock,quantityOfGifts,checkLength,finishOrder,orderDataSize,btnSubmit} from '../modules/3.functions_for_checkout.js';
 import {createShopCart,update,saveItemsInCart,quantityChange,removeCartItem} from '../modules/2.functions.js';
 
 let orderBook;
 orderBook = createOrderBook();
-
 
 let divCartBody = document.querySelector('.cart_body');
 
@@ -26,16 +25,6 @@ for(let i =0;i<orderBook.length;i++){
     crossShopInOrder.addEventListener('click',removeCartItemInOrder);
     updateTotalInOrder();
 }
-
-let reg = /^[a-zA-ZА-Яа-яЁё]+$/;
-let reg2 = /^[a-zA-ZА-Яа-яЁё0-9]+$/;
-let reg3 = /^[1-9][0-9]*$/;
-let reg4 = /(^[1-9][0-9]*$)|(^[1-9][0-9]*-[0-9]+$)/;
-let orderData = new Map();
-let orderDataSize = orderData.size;
-let btnSubmit = document.querySelector('.btn_submit');
-
-
 
 let inputData = document.querySelectorAll('input');
 inputData.forEach((input)=>{
