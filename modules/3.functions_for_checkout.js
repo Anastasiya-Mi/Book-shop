@@ -1,6 +1,11 @@
 "use strict"
 import {cart} from '../modules/1.variables.js';
 import {fragment,reg,reg2,reg3,reg4,orderData} from '../modules/1.variables.js';
+import {createDiv,createImg,createTitle,createBtn,createBookCard,createHeader,createMain,createFooter,
+    createShoppingCart,createHeaderCart,createFooterCart,createBtnConfirm,createCloseBtn,createShopIcon} from '../modules/2.functions.js';
+import {updateCartTotal,removeCartItem} from '../modules/2.functions.js';
+import {quantityChange,addToCartClicked,addToCart,createShopCart,saveItemsInCart,update} from '../modules/2.functions.js';
+import {createPopup,closeModalWin,createParagraph} from '../modules/2.functions.js';
 export let orderDataSize = orderData.size;
 export let btnSubmit = document.querySelector('.btn_submit');
 const functionsForCheckout ={
@@ -48,8 +53,8 @@ const functionsForCheckout ={
     },
     removeCartItemInOrder:function (event){
         let buttonClicked = event.target.closest('.cross_shop');
-        let parent = buttonClicked.parentElement.parentElement;    
-        let parentID = parent.getAttribute('id');
+        let parent = buttonClicked.parentElement.parentElement.parentElement.parentElement;    
+        let parentID = parent.getAttribute('id');        
         let cartValue = cart.find((cart)=> cart.id === parentID); 
         let cartIndex =cart.indexOf(cartValue);
         cart.splice(cartIndex,1);    
@@ -62,9 +67,56 @@ const functionsForCheckout ={
         let cartShopValue = document.querySelectorAll('.book_cart_shop');        
         if (cartShopValue.length == 0){            
             let emptyDiv = document.querySelector('.empty'); 
-            emptyDiv.style.display = 'block';
+            emptyDiv.style.display = 'flex';
         }
-    }
+    },
+    createShopCartInOrder:function (value){
+        let cardId = value.id;
+        let bookCardShop = createDiv('book_card_shop');
+        bookCardShop.dataset.id = cardId;
+        let divBookImgShop = createDiv('book_img_shop');
+        let src = value.imageLink;    
+        let bookImgShop = createImg(src,'cover');
+        divBookImgShop.append(bookImgShop);
+        let divBookInfoShop = createDiv('book_info_shop');
+        let title = value.title;
+        let titleBook = createTitle("h4",title);
+        let author =value.author;
+        let authorBook = createTitle("h3",author);
+        divBookInfoShop.append(titleBook);
+        divBookInfoShop.append(authorBook);
+        let divCountShop = createDiv('book_count_shop');
+        let divCountShopWrap = createDiv('book_count_shop_wrap');
+        let price =value.price;
+        let priceBook = createTitle("h5",price);
+        priceBook.classList.add('card_shop_price')
+        let currency = createTitle("h5","$");
+        divCountShop.append(priceBook);
+        divCountShop.append(currency);
+        let divShopBtn = createDiv('shop_btn');
+        let divShopInfoWrap = createDiv('shop_info_wrap');
+        let input = document.createElement('input');
+        input.classList.add('card_shop_quantity');
+        input.setAttribute('type','number');
+        input.setAttribute('value','1');
+        input.dataset.id = value.id;
+        input.addEventListener('change',quantityChange);
+        let divCrossShop = createDiv('cross_shop');
+        let span = document.createElement('span');
+        let span1 = document.createElement('span');       
+        divCrossShop.append(span);
+        divCrossShop.append(span1);
+        divCrossShop.addEventListener('click',removeCartItem);
+        divCountShopWrap.append(divCountShop);
+        divCountShopWrap.append(divShopBtn);
+        divShopBtn.append(input);
+        divShopBtn.append(divCrossShop);
+        divShopInfoWrap.append(divBookInfoShop);
+        divShopInfoWrap.append(divCountShopWrap);        
+        bookCardShop.append(divBookImgShop);
+        bookCardShop.append(divShopInfoWrap);        
+        return bookCardShop;
+    },
 };
 
 const functionsForValidation = {    
@@ -231,7 +283,7 @@ finishOrder:function finishOrder(event){
     messCus.innerText = messageCustomer;
     messDate.innerText = messageDate;
     let order = document.querySelector('.order');
-    order.style.display ='block';
+    order.style.display ='flex';
 }
 
 }
@@ -241,6 +293,7 @@ export const updateTotalInOrder = functionsForCheckout.updateTotalInOrder;
 export const quantityChangeInOrder = functionsForCheckout.quantityChangeInOrder;
 export const removeCartItemInOrder = functionsForCheckout.removeCartItemInOrder;
 export const createEmptyOrder = functionsForCheckout.createEmptyOrder;
+export const createShopCartInOrder = functionsForCheckout.createShopCartInOrder;
 
 export const validation = functionsForValidation.validation;
 export const validationBlock = functionsForValidation.validationBlock;

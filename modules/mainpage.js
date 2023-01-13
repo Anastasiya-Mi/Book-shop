@@ -70,17 +70,6 @@ for( let i=0;i<addToCartButtons.length;i++){
     update();
 }
 
-// let divCartBody = document.querySelector('.cart_body');
-// for(let i =0;i<cart.length;i++){
-//     let value = cart[i];
-//     let books = createShopCart (value);
-//     fragment.append(books);
-//     divCartBody.append(fragment);
-//     let quantityValue = document.querySelectorAll('.card_shop_quantity')[i];
-//     let currentValue = cart[i].numberOfUnits;
-//     quantityValue.setAttribute('value',currentValue);
-// }
-// update();
 let divShopIcon = document.querySelector('.shop_icon_wrap');
 divShopIcon.addEventListener('click',showCart)
 function showCart(event){

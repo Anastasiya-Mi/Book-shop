@@ -17,7 +17,7 @@ ul{
     list-style: none;
 }
 /* import fonts */
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;0,900;1,300;1,400;1,600&display=swap');
+
 @font-face {
     font-family: 'Source Sans Pro';
     src: url(../../assets/fonts/SourceSansPro-Black.ttf);    
@@ -429,8 +429,7 @@ footer{
     align-items: center;
 }
 .cart_body::-webkit-scrollbar{
-    width: 4px;   
-    
+    width: 4px;       
 }
 .cart_body h3{
     font: italic 200 18px/20px Source Sans Pro;
@@ -559,14 +558,12 @@ footer{
     background: rgba(255, 255, 255, 0.7);    
     display: flex;
     justify-content: center;
-    z-index: 4;
-    
+    z-index: 4;    
 }
 .book_wrap{
     display: flex;    
     align-items: center;
-    background: rgba(88, 88, 88, 0.7); 
-    position: relative;
+    background: rgba(88, 88, 88, 0.7);     
     margin: 0 auto;
     top: 25%;
     width: 650px;
