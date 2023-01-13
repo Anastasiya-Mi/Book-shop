@@ -49,7 +49,7 @@ const functionsForMainPage = {
         let title = value.title;
         let titleBook = createTitle("h4",title);
         let author =value.author;
-        let authorBook = createTitle("h3",author); 
+        let authorBook = createTitle("h3",'by '+author); 
         let divCount = createDiv('book_count');  
         let price =value.price;
         let priceBook = createTitle("h5",price);
@@ -96,26 +96,28 @@ const functionsForMainPage = {
         let footer = document.createElement('footer');
         let divContent = createDiv("content");
         let divContactInfo = createDiv("contact");  
-        let footerTitle = createTitle('h2','CONTACT');    
+        let footerTitle = createTitle('h2','CONTACT INFO');    
         divContactInfo.append(footerTitle);
+        let divContactInfoWrap = createDiv("contact_info");  
         let divMail = createDiv("mail");
         let imgMail = createImg("../../assets/icons/mail.svg","envelope");     
         let titleMail = createTitle('h3','contact@company.com');    
         divMail.append(imgMail);
         divMail.append(titleMail);
-        divContactInfo.append(divMail);
+        divContactInfoWrap.append(divMail);
         let divPhone = createDiv("phone");
         let imgPhone = createImg("../../assets/icons/phone.svg","phone");
-        let titlePhone = createTitle('h3','+1 333 4040 5566');    
+        let titlePhone = createTitle('h3','+1-333-4040-5566');    
         divPhone.append(imgPhone);
         divPhone.append(titlePhone);
-        divContactInfo.append(divPhone);
+        divContactInfoWrap.append(divPhone);
         let divLocation = createDiv("location");    
         let imgLocation = createImg("../../assets/icons/pin.svg","pin");
         let titleLocation = createTitle('h3','43 Brooklyn Ave, Brooklyn, NY 11216, USA');  
         divLocation.append(imgLocation);
         divLocation.append(titleLocation);
-        divContactInfo.append(divLocation);
+        divContactInfoWrap.append(divLocation);
+        divContactInfo.append(divContactInfoWrap)
         divContent.append(divContactInfo);
         footer.append(divContent);
         return footer;
@@ -146,8 +148,11 @@ const functionsForShoppingCart = {
         countTitle.classList.add('title_count');
         let divSubTitle = createDiv('sub_title');
         let subTitle1 = createTitle('h3',"Item");
+        subTitle1.classList.add('sub_title_item');
         let subTitle2 = createTitle('h3',"Price");
+        subTitle2.classList.add('sub_title_price');
         let subTitle3 = createTitle('h3',"Quantity");
+        subTitle3.classList.add('sub_title_quantity');
         divSubTitle.append(subTitle1);
         divSubTitle.append(subTitle2);
         divSubTitle.append(subTitle3);
@@ -210,7 +215,7 @@ const functionsForShoppingCart = {
         shopTotal.classList.add('shop_total_header')
         divShopTotal.append(shopTotal);
         divShopIconWrap.append(divShopImg);
-        divShopIconWrap.append(shopTotal);
+        divShopIconWrap.append(divShopTotal);
         return divShopIconWrap;    
     },  
     updateCartTotal:function(){
@@ -234,6 +239,13 @@ const functionsForShoppingCart = {
         let titleTotalItemsHeader = document.getElementsByClassName('shop_total_header')[0];
         subtotal.innerText = total +' $';
         subtotalItems.innerText = totalItems +' items';
+        let bookTitle = document.querySelector('.cart_body>h3');
+        if(totalItems == 0){
+            bookTitle.style.display = 'block';
+        }
+        if(totalItems > 0){
+            bookTitle.style.display = 'none';
+        }
         titleTotalItems.innerText = totalItems;
         titleTotalItemsHeader.innerText = totalItems;
       },
@@ -309,7 +321,7 @@ const functionsForShoppingCart = {
             let authorBook = createTitle("h3",author);
             divBookInfoShop.append(titleBook);
             divBookInfoShop.append(authorBook);
-            let divCountShop = createDiv('book_count');
+            let divCountShop = createDiv('book_count_shop');
             let price =value.price;
             let priceBook = createTitle("h5",price);
             priceBook.classList.add('card_shop_price')
