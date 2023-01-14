@@ -104,10 +104,19 @@ ul{
     display: flex;
     position: fixed;
     right: 0;
-    top: 33px;
+    top: 53px;
     align-items: center;
     cursor: pointer;
-    z-index: 1;
+    z-index: 1;    
+}
+.shop_icon_wrap span{
+    font: normal 700 14px/16px Source Sans Pro;
+    color: #585858;
+    width: 60px; 
+    text-align: center;
+    position: absolute;
+    top: -25px;
+    right:55px;
 }
 .shop_img{
     width: 80px;
@@ -336,7 +345,7 @@ ul{
     height: 400px;
     background: #585858;
     position: fixed;
-    top: 140px;
+    top: 160px;
     right: -100%;
     transition: all 1s ease;
 }
@@ -548,6 +557,18 @@ footer{
     cursor: pointer;
     text-transform: uppercase;
 }
+.confirm:disabled{
+    width: 95px;
+    height: 19px;
+    border: 1px solid #F5F5F5;
+    background: rgba(255, 255, 255, 0.7);
+    font: normal 900 12px/15px Source Sans Pro; 
+    color: #F5F5F5;
+    text-align: center;
+    cursor: pointer;
+    text-transform: uppercase; 
+}
+
 /* ------------modal window------------ */
 
 .modal_body{

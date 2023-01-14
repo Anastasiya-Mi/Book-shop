@@ -212,10 +212,13 @@ const functionsForShoppingCart = {
         divShopImg.append(img);
         let divShopTotal = createDiv('shop_total_value');
         let shopTotal = createTitle("h5",'0');
+        let message = document.createElement('span');        
+        message.innerText = 'Drag&drop here ⇩';
         shopTotal.classList.add('shop_total_header')
         divShopTotal.append(shopTotal);
         divShopIconWrap.append(divShopImg);
         divShopIconWrap.append(divShopTotal);
+        divShopIconWrap.prepend(message);
         return divShopIconWrap;    
     },  
     updateCartTotal:function(){
@@ -240,11 +243,15 @@ const functionsForShoppingCart = {
         subtotal.innerText = total +' $';
         subtotalItems.innerText = totalItems +' items';
         let bookTitle = document.querySelector('.cart_body>h3');
+        let confirmBtn = document.querySelector('.confirm');
+        
         if(totalItems == 0){
             bookTitle.style.display = 'block';
+            confirmBtn.setAttribute('disabled','disabled')
         }
         if(totalItems > 0){
             bookTitle.style.display = 'none';
+            confirmBtn.removeAttribute('disabled');
         }
         titleTotalItems.innerText = totalItems;
         titleTotalItemsHeader.innerText = totalItems;

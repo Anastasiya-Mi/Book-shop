@@ -126,11 +126,11 @@ const functionsForValidation = {
         let currentLength = currentName.length; 
         let messageName = document.querySelector('.name_invalid');       
         if(reg.test(currentName) === false || currentLength < 4){        
-            this.classList.add('invalid');
+            this.parentElement.classList.add('invalid');
             messageName.style.display = 'block';
         }
         if(reg.test(currentName) === true && currentLength >=4){
-            this.classList.remove('invalid'); 
+            this.parentElement.classList.remove('invalid'); 
             messageName.style.display = 'none'; 
             orderData.set('userName',currentName);
             checkLength ();      
@@ -141,11 +141,11 @@ const functionsForValidation = {
         let currentLength = currentSurname.length;
         let messageName = document.querySelector('.surname_invalid');
         if(reg.test(currentSurname) === false || currentLength < 5 || currentLength == 0){            
-                this.classList.add('invalid');
+            this.parentElement.classList.add('invalid');
                 messageName.style.display = 'block';
             }
             if(reg.test(currentSurname) === true && currentLength >=5){            
-                this.classList.remove('invalid');
+                this.parentElement.classList.remove('invalid'); 
                 messageName.style.display = 'none';
                 orderData.set('userSurname',currentSurname); 
                 checkLength ();            
@@ -159,11 +159,11 @@ const functionsForValidation = {
         let clientDate = Number(clientDateValue);
         let message = document.querySelector('.date_invalid');
         if(clientDate === today || clientDate < today){
-            this.classList.add('invalid');
+            this.parentElement.classList.add('invalid');
             message.style.display = 'block';
         }    
         if(clientDate > today){
-            this.classList.remove('invalid');
+            this.parentElement.classList.remove('invalid'); 
             message.style.display = 'none';
             orderData.set('deliveryDate',value); 
             checkLength ();
@@ -175,11 +175,11 @@ const functionsForValidation = {
         let currentLength = currentStreet.length;
         let message = document.querySelector('.street_invalid');
         if(reg2.test(currentStreet) === false || currentLength < 5){            
-                this.classList.add('invalid');
+                this.parentElement.classList.add('invalid');
                 message.style.display = 'block';
             }
             if(reg2.test(currentStreet) === true && currentLength >=5){
-                this.classList.remove('invalid');
+                this.parentElement.classList.remove('invalid');
                 message.style.display = 'none';
                 orderData.set('street',currentStreet);
                 checkLength (); 
@@ -189,11 +189,11 @@ const functionsForValidation = {
         let currentHouse = this.value;        
         let message = document.querySelector('.house_number_invalid');
         if(reg3.test(currentHouse) === false){            
-                this.classList.add('invalid');
+                this.parentElement.classList.add('invalid');
                 message.style.display = 'block';
             }
             if(reg3.test(currentHouse) === true){
-                this.classList.remove('invalid');
+                this.parentElement.classList.remove('invalid');
                 message.style.display = 'none';                
                 orderData.set('houseNumber',currentHouse); 
                 checkLength ();  
@@ -203,11 +203,11 @@ const functionsForValidation = {
         let currentFlat = this.value;        
         let message = document.querySelector('.flat_number_invalid');
         if(reg4.test(currentFlat) === false){            
-                this.classList.add('invalid');
+                this.parentElement.classList.add('invalid');
                 message.style.display = 'block';
             }
             if(reg4.test(currentFlat) === true){
-                this.classList.remove('invalid');
+                this.parentElement.classList.remove('invalid');
                 message.style.display = 'none';                
                 orderData.set('flatNumber',currentFlat); 
                 checkLength ();

@@ -331,10 +331,8 @@ input.payment{
 }
 .checkbox_container{
     display: flex;
-    align-items: center;
-    /* flex-direction: row; */
-    gap: 10px;
-    /* width: 110px; */
+    align-items: center;    
+    gap: 10px;    
     flex-wrap: wrap;
 }
 .checkbox_label{
@@ -349,7 +347,10 @@ input.payment{
 }
 div.input_box.radio h3,div.input_box.gifts_box h3{
     font: normal 300 18px/20px Source Sans Pro;
-    color: #585858; 
+    color: #585858;    
+}
+div.input_box.radio{    
+    height: 100px;
 }
 .btn_submit_wrap{
     padding-top: 100px;
@@ -371,24 +372,10 @@ div.input_box.radio h3,div.input_box.gifts_box h3{
     font: normal 900 13px/15px Source Sans Pro;
     letter-spacing: 4.48px;
 }
-input.name.invalid{
+div.input_box.invalid{
     border: 2px solid red;
 }
-input.surname.invalid{
-    border: 2px solid red;
-}
-input.delivery.invalid{
-    border: 2px solid red;
-}
-input.street.invalid{
-    border: 2px solid red;
-}
-input.house_number.invalid{
-    border: 2px solid red;
-}
-input.flat_number.invalid{
-    border: 2px solid red;
-}
+
 div.input_box.radio.payment_invalid_mess{
     border: 2px solid red; 
 }
@@ -403,7 +390,19 @@ div.input_box.radio.payment_invalid_mess{
 .gifts_invalid{
     display: none;
 }
-
+.name_invalid,
+.surname_invalid,
+.date_invalid,
+.flat_number_invalid,
+.house_number_invalid,
+.street_invalid,
+.payment_invalid,
+.gifts_invalid{    
+    color: rgba(214, 10, 10, 0.752);
+    padding-top: 5px;
+    font: normal 700 16px/18px Source Sans Pro;
+    letter-spacing: 0.04em;
+}
 .order,.empty{
     position: absolute;
     top: 0;
