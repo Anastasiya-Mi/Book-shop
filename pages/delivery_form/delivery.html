@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="delivery.css" type="text/css">
+    <script type='module' src="../../modules/form.js"></script>
+    <title>Checkout</title>
+</head>
+
+<body>
+    <header>
+        <div class="content">
+            <div class="logo" id="logo">
+                <div class="header_icon"><img src="../../assets/icons/feather.svg" alt="feather"></div>
+                <a href="../main/index.html">
+                    <h1>SHELF</h1>
+                </a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="delivery_content_wrap">
+            <div class="content">
+                <div class="delivery_content">
+                    <div class="delivery_title">
+                        <h2>Checkout</h2>
+                    </div>
+                    <div class="cart_wrap">
+                        <div class="cart_body">
+                        </div>
+                        <div class="footer_cart_subtotal">
+                            <h3>Subtotal:</h3>
+                            <span class="sub_total_items">0 items</span>
+                            <span class="sub_total_count">0 $</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form_wrap">
+            <div class="content">
+                <div class="form_row">
+                    <form class="form" id="add_form">
+                        <div class="input_box">
+                            <input type="text" class="name" id="name" placeholder="Name" value="">
+                            <span class="name_invalid">The field is invalid!At least 4 letters!</span>
+                        </div>
+                        <div class="input_box">
+                            <input type="text" class="surname" placeholder="Surname">
+                            <span class="surname_invalid">The field is invalid!At least 5 letters!</span>
+                        </div>
+                        <div class="input_box">
+                            <label for="delivery_date" class="delivery_label">Delivery date</label>
+                            <input type="date" class='delivery' id="delivery_date" value="">
+                            <span class="date_invalid">The field is invalid!Not earlier than next day!</span>
+                        </div>
+                        <div class="input_box">
+                            <input type="text" class="street" placeholder="Street">
+                            <span class="street_invalid">The field is invalid!At least 5 symbols!</span>
+                        </div>
+                        <div class="input_box">
+                            <input type="number" class="house_number" placeholder="House number">
+                            <span class="house_number_invalid">The field is invalid!Positive numbers only!</span>
+                        </div>
+                        <div class="input_box ">
+                            <input type="text" class="flat_number" placeholder="Flat number">
+                            <span class="flat_number_invalid">The field is invalid!Positive numbers only!exm. 1-23
+                                or 23!</span>
+                        </div>
+                        <div class="input_box radio">
+                            <h3>Choose the payment type</h3>
+                            <div class="payment_label">                                                          
+                                <input type="radio" id="cash" class="payment" name="payment" value="cash">
+                                <label for="cash">cash</label> 
+                                </div>  
+                                <div class="payment_label">                        
+                                <input type="radio" id="cart" class="payment" name="payment" value="cart">
+                                <label for="cart">cart</label> 
+                            </div>         
+                                <span class="payment_invalid">The field is invalid!Select type of payment!</span>
+                        </div>
+                        <div class="input_box gifts_box">
+                            <h3>Choose 2 gifts(optional):</h3>
+                            <div class="checkbox_container">
+                            <div class="checkbox_label">  
+                            <input type="checkbox" id="pack" class="gifts" value="pack">
+                            <label for="pack">pack as a gift</label>
+                            </div>
+                            <div class="checkbox_label"> 
+                            <input type="checkbox" id="postcard" class="gifts" value="postcard">
+                            <label for="pack">add postcard</label>
+                        </div>
+                            <div class="checkbox_label"> 
+                            <input type="checkbox" id="discount" class="gifts" value="discount">
+                            <label for="discount">provide 2% discount to the next time</label>
+                        </div>
+                            <div class="checkbox_label"> 
+                            <input type="checkbox" id="branded" class="gifts" value="branded">
+                            <label for="branded">branded pen or pencil</label>
+                        </div>
+                    </div>
+                        </div>
+                        <div class="btn_submit_wrap">
+                            <button class="btn_submit" disabled="disabled">FINISH</button>
+                        </div>
+                    </form>
+                    <div class="contact_wrap">
+                        <h2>CONTACT INFO</h2>
+                        <div class="contact">
+                            <div class="mail"><img src="../../assets/icons/mail.svg" alt="envelope">
+                                <h3>contact@company.com</h3>
+                            </div>
+                            <div class="phone"><img src="../../assets/icons/phone.svg" alt="phone">
+                                <h3>+1 333 4040 5566</h3>
+                            </div>
+                            <div class="location"><img src="../../assets/icons/pin.svg" alt="pin">
+                                <h3>43 Brooklyn Ave, Brooklyn, NY 11216, USA</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+        </div>
+        <div class="empty">
+            <div class="empty_body">
+                <h3>Your cart is empty!</h3>
+                <p>Please return to the main page to place an order!</p>
+                <form action="../main/index.html">
+                    <button class="btn_empty">Done</button>
+                </form>
+            </div>
+        </div>
+        <div class="order">
+            <div class="order_body">
+                <h3>The order created!</h3>
+                <h4 class="message_address"></h4>
+                <h4 class="message_customer"></h4>
+                <h4 class="message_date"></h4>
+                <form action="../main/index.html">
+                    <button class="btn_order">Done</button>
+                </form>
+            </div>
+        </div>
+
+    </main>
+</body>
+
+</html>
