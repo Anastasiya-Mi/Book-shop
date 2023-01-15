@@ -347,11 +347,11 @@ ul{
     position: fixed;
     top: 160px;
     right: -100%;
-    transition: all 1s ease;
+    transition: all 0.5s ease;
 }
 div.cart_wrap.clicked{    
     right: 20px;
-    transition: all 1s ease;
+    transition: all 0.5s ease;
 }
 
 footer{
@@ -564,8 +564,7 @@ footer{
     background: rgba(255, 255, 255, 0.7);
     font: normal 900 12px/15px Source Sans Pro; 
     color: #F5F5F5;
-    text-align: center;
-    cursor: pointer;
+    text-align: center;    
     text-transform: uppercase; 
 }
 

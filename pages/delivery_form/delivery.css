@@ -213,6 +213,7 @@ header,.delivery_content_wrap{
     padding-left: 5px;
     padding-right: 15px;
     justify-content: space-between;
+    align-items: center;
 }
 .book_count_shop{
     display: flex;
@@ -371,6 +372,7 @@ div.input_box.radio{
     background-color: #585858;
     font: normal 900 13px/15px Source Sans Pro;
     letter-spacing: 4.48px;
+    cursor: pointer;
 }
 div.input_box.invalid{
     border: 2px solid red;
@@ -453,4 +455,5 @@ div.input_box.radio.payment_invalid_mess{
     font: normal 900 13px/15px Source Sans Pro;
     color: #585858;
     letter-spacing: 4.48px;
+    cursor: pointer;
 }

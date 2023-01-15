@@ -153,16 +153,24 @@ const functionsForValidation = {
     }
     if(this.classList.contains('delivery')){        
         let fullDateTime = new Date();
-        let today = fullDateTime.getDate();
+        let day = fullDateTime.getDate();
+        let month = fullDateTime.getMonth();
+        let year = fullDateTime.getFullYear();
+        console.log(typeof(day,month,year))
         let value = this.value;
-        let clientDateValue = value.substr(8,2);
-        let clientDate = Number(clientDateValue);
+        console.log(typeof(value));
+        let dateArr = value.split('-');
+        console.log(dateArr);
+        let clientDay = Number(dateArr[2]);
+        let clientMonth = Number(dateArr[1]);
+        let clientYear = Number(dateArr[0]);
+        console.log(typeof(clientDay,clientMonth,clientYear));        
         let message = document.querySelector('.date_invalid');
-        if(clientDate === today || clientDate < today){
+        if(clientYear === year || clientYear < year || clientDay === day || clientDay < day || clientMonth === month || clientMonth < month){
             this.parentElement.classList.add('invalid');
             message.style.display = 'block';
         }    
-        if(clientDate > today){
+        if(clientDay > day && clientMonth >=month && clientYear>=year){
             this.parentElement.classList.remove('invalid'); 
             message.style.display = 'none';
             orderData.set('deliveryDate',value); 
@@ -174,11 +182,11 @@ const functionsForValidation = {
         let currentStreet = this.value;
         let currentLength = currentStreet.length;
         let message = document.querySelector('.street_invalid');
-        if(reg2.test(currentStreet) === false || currentLength < 5){            
+        if(currentLength < 5){            
                 this.parentElement.classList.add('invalid');
                 message.style.display = 'block';
             }
-            if(reg2.test(currentStreet) === true && currentLength >=5){
+            if(currentLength >=5){
                 this.parentElement.classList.remove('invalid');
                 message.style.display = 'none';
                 orderData.set('street',currentStreet);
